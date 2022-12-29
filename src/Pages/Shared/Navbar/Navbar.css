@@ -1,0 +1,7 @@
+.menu li {
+  margin-right: 10px;
+}
+a.active {
+  background-color: #4b5563;
+  color: white;
+}

@@ -1,14 +1,26 @@
 /* eslint-disable no-undef */
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ['./src/**/*.{html,js}', 'node_modules/flowbite-react/**/*.{js,jsx,ts,tsx}'],
-  theme: {
-    extend: {},
-    screens: {
-      sm: '480px',
-      md: '768px',
-      lg: '1440px'
-    }
+  content: ['./src/**/*.{html,js}'],
+  daisyui: {
+    themes: [
+      {
+        doctorsthemes: {
+          primary: '#3A4256',
+
+          secondary: '#19D3AE',
+
+          accent: '#FFFFFF',
+
+          neutral: '#3D4451',
+
+          'base-100': '#FFFFFF'
+        }
+      }
+    ]
   },
-  plugins: [require('daisyui'), require('flowbite/plugin')]
+  theme: {
+    extend: {}
+  },
+  plugins: [require('daisyui')]
 };
