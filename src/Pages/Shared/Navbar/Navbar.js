@@ -6,21 +6,29 @@ const Navbar = () => {
   const menuList = (
     <>
       <li>
-        <NavLink to={'/home'} className="selection:bg-fuchsia-300">
+        <NavLink to={'/home'} className="hover:bg-gray-200 hover:text-black">
           Home
         </NavLink>
       </li>
       <li>
-        <NavLink to={'/about'}>About</NavLink>
+        <NavLink className="hover:bg-gray-200 hover:text-black" to={'/about'}>
+          About
+        </NavLink>
       </li>
       <li>
-        <NavLink to={'/appointment'}>Appointment</NavLink>
+        <NavLink className="hover:bg-gray-200 hover:text-black" to={'/appointment'}>
+          Appointment
+        </NavLink>
       </li>
       <li>
-        <NavLink to={'/reviews'}>Reviews</NavLink>
+        <NavLink className="hover:bg-gray-200 hover:text-black" to={'/reviews'}>
+          Reviews
+        </NavLink>
       </li>
       <li>
-        <NavLink to={'/contact'}>Contact Us</NavLink>
+        <NavLink className="hover:bg-gray-200 hover:text-black" to={'/contact'}>
+          Contact Us
+        </NavLink>
       </li>
     </>
   );
