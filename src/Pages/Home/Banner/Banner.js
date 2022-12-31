@@ -4,7 +4,7 @@ import Button from '../../../Components/Button/Button';
 import './Banner.css';
 const Banner = () => {
   return (
-    <div className="mt-6">
+    <div className="mt-6 ">
       <div className="banner-bg hero  bg-no-repeat bg-bottom bg-cover">
         <div className="hero-content flex-col lg:flex-row-reverse">
           <img src={bannerImage} className="lg:w-1/2 rounded-lg shadow-2xl" />
