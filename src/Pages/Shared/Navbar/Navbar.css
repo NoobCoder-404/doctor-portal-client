@@ -2,6 +2,6 @@
   margin-right: 10px;
 }
 a.active {
-  background-color: #4b5563;
-  color: white;
+  background-color: #4b5563 !important;
+  color: white !important;
 }
