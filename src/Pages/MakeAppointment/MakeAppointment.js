@@ -1,8 +1,8 @@
 import React from 'react';
 import DoctorImg from '../../Assets/images/doctor-small.png';
 import Button from '../../Components/Button/Button';
-import './AppointmentBanner.css';
-const AppointmentBanner = () => {
+import './MakeAppointment.css';
+const MakeAppointment = () => {
   return (
     <div>
       <div className="lg:mt-32 hero  text-white appointmentImg  mx-3">
@@ -29,4 +29,4 @@ const AppointmentBanner = () => {
   );
 };
 
-export default AppointmentBanner;
+export default MakeAppointment;
