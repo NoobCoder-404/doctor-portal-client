@@ -21,7 +21,13 @@ const AvailableAppointments = ({ selectedDate }) => {
           <AvailableAppointment key={i} option={option} setTreatment={setTreatment} />
         ))}
       </div>
-      {treatment && <BookingModel treatment={treatment} setTreatment={setTreatment} />}
+      {treatment && (
+        <BookingModel
+          selectedDate={selectedDate}
+          treatment={treatment}
+          setTreatment={setTreatment}
+        />
+      )}
     </div>
   );
 };

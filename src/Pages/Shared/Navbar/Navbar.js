@@ -30,6 +30,11 @@ const Navbar = () => {
           Contact Us
         </NavLink>
       </li>
+      <li>
+        <NavLink className="hover:bg-gray-200 hover:text-black" to={'/login'}>
+          Login
+        </NavLink>
+      </li>
     </>
   );
 
