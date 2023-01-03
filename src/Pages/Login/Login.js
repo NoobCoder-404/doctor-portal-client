@@ -1,18 +1,19 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 
 const Login = () => {
   const { register, handleSubmit } = useForm();
-  const [data, setData] = useState('');
+  const handleLogin = (data) => {
+    console.log(data);
+  };
+
   return (
     <div className=" flex justify-center mt-20 ">
       <div className="shadow-2xl p-5 rounded-lg">
         <h1 className="text-3xl mb-6 text-center">Login</h1>
-        <form
-          className=" font-semibold"
-          onSubmit={handleSubmit((data) => setData(JSON.stringify(data)))}>
-          <div className="form-control w-96 mb-2 font-semibold">
+        <form onSubmit={handleSubmit(handleLogin)}>
+          <div className="form-control w-96 mb-2 ">
             <label className="label">
               <span className="label-text">Name</span>
             </label>
@@ -36,7 +37,6 @@ const Login = () => {
             </label>
           </div>
 
-          <p>{data}</p>
           <input className="w-96 btn bg-primary text-white" value="Login" type="submit" />
           <br />
         </form>
