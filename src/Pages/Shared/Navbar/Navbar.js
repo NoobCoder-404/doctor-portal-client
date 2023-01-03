@@ -35,6 +35,11 @@ const Navbar = () => {
           Login
         </NavLink>
       </li>
+      <li>
+        <NavLink className="hover:bg-gray-200 hover:text-black" to={'/signup'}>
+          Sign Up
+        </NavLink>
+      </li>
     </>
   );
 
