@@ -1,10 +1,16 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
+import { toast } from 'react-hot-toast';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Contexts/AuthProvider';
 
 const SingUp = () => {
-  const { createUser } = useContext(AuthContext);
+  const { createUser, profileUpdate } = useContext(AuthContext);
+  const [signUpError, setSignUpError] = useState('');
+
+  let navigate = useNavigate();
+  let location = useLocation();
+  const from = location.state?.from?.pathname || '/';
 
   const {
     register,
@@ -12,13 +18,29 @@ const SingUp = () => {
     formState: { errors }
   } = useForm();
   const handleRegister = (data) => {
-    console.log(data);
+    //console.log(data);
+    setSignUpError('');
     createUser(data.email, data.password)
       .then((result) => {
         const user = result.user;
         console.log(user);
+        navigate(from, { replace: true });
+        toast.success('user created successfull');
+
+        const userInfo = {
+          displayName: data.name
+        };
+
+        profileUpdate(userInfo)
+          .then(() => {
+            console.log('name update');
+          })
+          .catch((error) => console.error(error.message));
       })
-      .catch((error) => console.error(error.message));
+      .catch((error) => {
+        console.error(error.message);
+        setSignUpError(error.message);
+      });
   };
   return (
     <div className="flex justify-center mt-20 ">
@@ -33,7 +55,7 @@ const SingUp = () => {
             </label>
             <input
               type="text"
-              {...register('fullName', { required: 'Name is required' })}
+              {...register('name', { required: 'Name is required' })}
               className="input input-bordered w-full "
             />
           </div>
@@ -78,6 +100,7 @@ const SingUp = () => {
           </div>
 
           <button className="w-full  btn btn-primary text-white">Sign Up</button>
+          {signUpError && <p className="text-red-600 text-center">{signUpError}</p>}
           <p className="text-center my-3">
             <span>
               Already have an account?{' '}

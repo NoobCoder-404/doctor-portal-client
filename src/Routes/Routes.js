@@ -3,10 +3,11 @@ import Main from '../Layouts/Main';
 import About from '../Pages/About/About';
 import Appointment from '../Pages/Appointment/Appointment/Appointment';
 import Contact from '../Pages/Contact/Contact';
+import Dashboard from '../Pages/Dashboard/Dashboard/Dashboard';
 import Home from '../Pages/Home/Home/Home';
 import Login from '../Pages/Login/Login';
-import Review from '../Pages/Review/Review';
 import SingUp from '../Pages/SignUp/SingUp';
+import PrivateRoutes from './PrivateRoutes';
 
 export const router = createBrowserRouter([
   {
@@ -33,10 +34,6 @@ export const router = createBrowserRouter([
         path: '/contact',
         element: <Contact />
       },
-      {
-        path: '/reviews',
-        element: <Review />
-      },
 
       {
         path: '/login',
@@ -47,5 +44,13 @@ export const router = createBrowserRouter([
         element: <SingUp />
       }
     ]
+  },
+  {
+    path: '/dashboard',
+    element: (
+      <PrivateRoutes>
+        <Dashboard />
+      </PrivateRoutes>
+    )
   }
 ]);

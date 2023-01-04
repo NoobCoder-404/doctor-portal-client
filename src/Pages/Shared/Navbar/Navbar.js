@@ -1,10 +1,18 @@
 import React, { useContext } from 'react';
+import { toast } from 'react-hot-toast';
 import { Link, NavLink } from 'react-router-dom';
 import { AuthContext } from '../../../Contexts/AuthProvider';
 import './Navbar.css';
 
 const Navbar = () => {
   const { logout, user } = useContext(AuthContext);
+  const handleLogOut = () => {
+    logout()
+      .then(() => {
+        toast.success('Logout successfully');
+      })
+      .catch((error) => console.error(error.message));
+  };
 
   const menuList = (
     <>
@@ -23,22 +31,25 @@ const Navbar = () => {
           Appointment
         </NavLink>
       </li>
-      <li>
-        <NavLink className="hover:bg-gray-200 hover:text-black" to={'/reviews'}>
-          Reviews
-        </NavLink>
-      </li>
+
       <li>
         <NavLink className="hover:bg-gray-200 hover:text-black" to={'/contact'}>
           Contact Us
         </NavLink>
       </li>
       {user?.uid ? (
-        <li>
-          <button onClick={logout} className="hover:bg-gray-200 hover:text-black">
-            Log out
-          </button>
-        </li>
+        <>
+          <li>
+            <NavLink className="hover:bg-gray-200 hover:text-black" to={'/dashboard'}>
+              Dashboard
+            </NavLink>
+          </li>
+          <li>
+            <button onClick={handleLogOut} className="hover:bg-gray-200 hover:text-black">
+              Log out
+            </button>
+          </li>
+        </>
       ) : (
         <>
           <li>
