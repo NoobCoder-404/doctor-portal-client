@@ -7,9 +7,7 @@ const PrivateRoutes = ({ children }) => {
   const { user, loading } = useContext(AuthContext);
   const location = useLocation();
   if (loading) {
-    <div>
-      return (<progress className="progress w-56"></progress>)
-    </div>;
+    return <div>Loading...</div>;
   }
   if (user) {
     return children;
