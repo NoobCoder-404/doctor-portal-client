@@ -42,8 +42,8 @@ const SingUp = () => {
             </label>
           </div>
 
-          <input defaultValue="Sign Up" className="mb-3 btn w-full text-white" type="submit" />
-          <p className="text-center">
+          <button className="w-full  btn btn-primary text-white">Sign Up</button>
+          <p className="text-center my-3">
             <span>
               Already have an account?{' '}
               <Link className="text-secondary hover:underline" to={'/login'}>

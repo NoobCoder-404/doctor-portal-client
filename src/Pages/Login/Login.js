@@ -14,10 +14,10 @@ const Login = () => {
 
   return (
     <div className=" flex justify-center mt-20 ">
-      <div className="shadow-2xl p-5 rounded-lg w-96">
+      <div className="shadow-2xl p-5 rounded-lg w-[400px]">
         <h1 className="text-3xl mb-6 text-center">Login</h1>
         <form onSubmit={handleSubmit(handleLogin)}>
-          <div className=" form-control  px-3 mb-2">
+          <div className=" form-control mb-2">
             <label className="label">
               <span className="label-text">Email</span>
             </label>
@@ -30,7 +30,7 @@ const Login = () => {
             />
             {errors.email && <p className="text-red-600">{errors.email?.message}</p>}
           </div>
-          <div className="form-control  mb-5 px-3">
+          <div className="form-control  mb-5 ">
             <label className="label">
               <span className="label-text">Password</span>
             </label>
@@ -48,7 +48,7 @@ const Login = () => {
             </label>
           </div>
 
-          <input defaultValue="Sign Up" className="mb-3 mx-3 btn w-full text-white" type="submit" />
+          <button className="w-full  btn btn-primary text-white">Login</button>
           <br />
         </form>
         <label className="flex justify-center my-3 ">
@@ -61,7 +61,7 @@ const Login = () => {
         </label>
         <div className="divider my-3 px-3">OR</div>
         <input
-          className="w-full mx-3 btn btn-outline hover:bg-primary mb-5 mt-3"
+          className="w-full  btn btn-outline hover:bg-primary mb-5 mt-3"
           value="Continue with Google"
           type="submit"
         />
