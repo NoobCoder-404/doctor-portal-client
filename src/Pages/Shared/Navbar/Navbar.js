@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link, NavLink } from 'react-router-dom';
+import { AuthContext } from '../../../Contexts/AuthProvider';
 import './Navbar.css';
 
 const Navbar = () => {
+  const { logout, user } = useContext(AuthContext);
+
   const menuList = (
     <>
       <li>
@@ -30,16 +33,26 @@ const Navbar = () => {
           Contact Us
         </NavLink>
       </li>
-      <li>
-        <NavLink className="hover:bg-gray-200 hover:text-black" to={'/login'}>
-          Login
-        </NavLink>
-      </li>
-      <li>
-        <NavLink className="hover:bg-gray-200 hover:text-black" to={'/signup'}>
-          Sign Up
-        </NavLink>
-      </li>
+      {user?.uid ? (
+        <li>
+          <button onClick={logout} className="hover:bg-gray-200 hover:text-black">
+            Log out
+          </button>
+        </li>
+      ) : (
+        <>
+          <li>
+            <NavLink className="hover:bg-gray-200 hover:text-black" to={'/login'}>
+              Login
+            </NavLink>
+          </li>
+          <li>
+            <NavLink className="hover:bg-gray-200 hover:text-black" to={'/signup'}>
+              Sign Up
+            </NavLink>
+          </li>
+        </>
+      )}
     </>
   );
 
