@@ -5,7 +5,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Contexts/AuthProvider';
 
 const SingUp = () => {
-  const { createUser, profileUpdate } = useContext(AuthContext);
+  const { createUser, profileUpdate, googleLogin } = useContext(AuthContext);
   const [signUpError, setSignUpError] = useState('');
 
   let navigate = useNavigate();
@@ -42,9 +42,21 @@ const SingUp = () => {
         setSignUpError(error.message);
       });
   };
+
+  const handleGoogleSignUp = () => {
+    googleLogin()
+      .then((result) => {
+        const user = result.user;
+        toast.success('google sign up successfull');
+        console.log(user);
+        navigate(from, { replace: true });
+      })
+      .catch((error) => console.error(error.message));
+  };
+
   return (
     <div className="flex justify-center mt-20 ">
-      <div className="w-96 rounded-lg shadow-2xl p-6">
+      <div className="w-[400px] rounded-lg shadow-2xl p-6">
         <div>
           <h3 className="text-3xl mb-6 text-center my-3 ">Sign Up</h3>
         </div>
@@ -112,6 +124,7 @@ const SingUp = () => {
         </form>
         <div className="divider ">OR</div>
         <input
+          onClick={handleGoogleSignUp}
           className="w-full  btn btn-outline hover:bg-primary mb-5 mt-3"
           value="Continue with Google"
           type="submit"

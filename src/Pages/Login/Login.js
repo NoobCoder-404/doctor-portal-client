@@ -5,7 +5,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Contexts/AuthProvider';
 
 const Login = () => {
-  const { login } = useContext(AuthContext);
+  const { login, googleLogin } = useContext(AuthContext);
   const [loginError, setLoginError] = useState('');
   let navigate = useNavigate();
   let location = useLocation();
@@ -30,6 +30,17 @@ const Login = () => {
         console.error(error.message);
         setLoginError(error.message);
       });
+  };
+
+  const handleGoogleLogin = () => {
+    googleLogin()
+      .then((result) => {
+        const user = result.user;
+        console.log(user);
+        toast.success('google login successfull');
+        navigate(from, { replace: true });
+      })
+      .catch((error) => console.error(error.message));
   };
 
   return (
@@ -84,6 +95,7 @@ const Login = () => {
         </label>
         <div className="divider my-3 px-3">OR</div>
         <input
+          onClick={handleGoogleLogin}
           className="w-full  btn btn-outline hover:bg-primary mb-5 mt-3"
           value="Continue with Google"
           type="submit"
