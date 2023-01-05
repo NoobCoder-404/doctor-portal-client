@@ -10,7 +10,7 @@ const Login = () => {
   let navigate = useNavigate();
   let location = useLocation();
   const from = location.state?.from?.pathname || '/';
-
+  //console.log(from);
   const {
     register,
     handleSubmit,
@@ -37,8 +37,8 @@ const Login = () => {
       .then((result) => {
         const user = result.user;
         console.log(user);
-        toast.success('google login successfull');
         navigate(from, { replace: true });
+        toast.success('google login successfull');
       })
       .catch((error) => console.error(error.message));
   };
