@@ -1,9 +1,12 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import { format } from 'date-fns';
-import React from 'react';
+import React, { useContext } from 'react';
+import { toast } from 'react-hot-toast';
+import { AuthContext } from '../../../Contexts/AuthProvider';
 
 const BookingModel = ({ treatment, setTreatment, selectedDate }) => {
+  const { user } = useContext(AuthContext);
   // console.log(treatment);
   const { name, slots } = treatment;
   const date = format(selectedDate, 'PP');
@@ -25,7 +28,22 @@ const BookingModel = ({ treatment, setTreatment, selectedDate }) => {
       slot
     };
     console.log(booking);
-    setTreatment(null);
+
+    fetch('http://localhost:5000/bookings', {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json'
+      },
+      body: JSON.stringify(booking)
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        if (data.acknowledged) {
+          setTreatment(null);
+          toast.success('Booking Confirmed');
+        }
+      });
   };
 
   return (
@@ -54,6 +72,8 @@ const BookingModel = ({ treatment, setTreatment, selectedDate }) => {
               ))}
             </select>
             <input
+              defaultValue={user?.displayName}
+              disabled
               name="name"
               type="text"
               placeholder="Full Name"
@@ -66,6 +86,8 @@ const BookingModel = ({ treatment, setTreatment, selectedDate }) => {
               className="input input-bordered w-full  mb-3"
             />
             <input
+              defaultValue={user?.email}
+              disabled
               name="email"
               type="email"
               placeholder="Email"

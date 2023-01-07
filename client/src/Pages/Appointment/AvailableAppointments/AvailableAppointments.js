@@ -1,16 +1,32 @@
 /* eslint-disable react/prop-types */
+import { useQuery } from '@tanstack/react-query';
 import { format } from 'date-fns';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import BookingModel from '../BookingModel/BookingModel';
 import AvailableAppointment from './AvailableAppointment/AvailableAppointment';
 const AvailableAppointments = ({ selectedDate }) => {
-  const [availableOptions, setAvailableOptions] = useState([]);
+  // const [availableOptions, setAvailableOptions] = useState([]);
   const [treatment, setTreatment] = useState(null);
-  useEffect(() => {
-    fetch('appointmentOptions.json')
-      .then((res) => res.json())
-      .then((data) => setAvailableOptions(data));
-  }, []);
+
+  const { data: availableOptions = [] } = useQuery({
+    queryKey: ['appointmentOptions'],
+    queryFn: async () => {
+      const res = await fetch('http://localhost:5000/appointmentOptions');
+      const data = res.json();
+      return data;
+    }
+  });
+
+  // const { data: availableOptions = [] } = useQuery({
+  //   queryKey: ['appointmentOptions'],
+  //   queryFn: () => fetch('http://localhost:5000/appointmentOptions').then((res) => res.json())
+  // });
+
+  // useEffect(() => {
+  //   fetch('http://localhost:5000/appointmentOptions')
+  //     .then((res) => res.json())
+  //     .then((data) => setAvailableOptions(data));
+  // }, []);
   return (
     <div className="mt-16">
       <p className="text-center text-secondary font-bold">
