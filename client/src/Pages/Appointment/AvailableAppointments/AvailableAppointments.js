@@ -2,20 +2,32 @@
 import { useQuery } from '@tanstack/react-query';
 import { format } from 'date-fns';
 import React, { useState } from 'react';
+import Loading from '../../../Components/Loading/Loading';
 import BookingModel from '../BookingModel/BookingModel';
 import AvailableAppointment from './AvailableAppointment/AvailableAppointment';
 const AvailableAppointments = ({ selectedDate }) => {
   // const [availableOptions, setAvailableOptions] = useState([]);
   const [treatment, setTreatment] = useState(null);
-
-  const { data: availableOptions = [] } = useQuery({
-    queryKey: ['appointmentOptions'],
+  const date = format(selectedDate, 'PP');
+  const {
+    data: availableOptions = [],
+    refetch,
+    isLoading
+  } = useQuery({
+    queryKey: ['appointmentOptions', date],
     queryFn: async () => {
-      const res = await fetch('http://localhost:5000/appointmentOptions');
+      const res = await fetch(`http://localhost:5000/appointmentOptions?date=${date}`);
       const data = res.json();
       return data;
     }
   });
+  if (isLoading) {
+    return (
+      <div className="mt-10 flex justify-center">
+        <Loading />
+      </div>
+    );
+  }
 
   // const { data: availableOptions = [] } = useQuery({
   //   queryKey: ['appointmentOptions'],
@@ -42,6 +54,7 @@ const AvailableAppointments = ({ selectedDate }) => {
           selectedDate={selectedDate}
           treatment={treatment}
           setTreatment={setTreatment}
+          refetch={refetch}
         />
       )}
     </div>
