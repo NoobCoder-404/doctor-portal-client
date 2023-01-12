@@ -43,6 +43,9 @@ const BookingModel = ({ treatment, setTreatment, selectedDate, refetch }) => {
           setTreatment(null);
           toast.success('Booking Confirmed');
           refetch();
+        } else {
+          setTreatment(null);
+          toast.error(data.message);
         }
       });
   };
